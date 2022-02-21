@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="email_template_birthday_reminder" model="mail.template">
+            <field name="name">Partner Birthday Reminder</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="partner_to">${object.id}</field>
+            <field name="subject">Employee birthday is soon</field>
+            <field name="body_html"><![CDATA[
+                <p>Hello ${object.name and object.name or ''},</p>
+                <p>To reminde you about upcoming birthday of <strong>${ctx['employee']}</strong> on <strong>${ctx['upcoming_birthday']}</strong> date
+                </p><p>Thank you!</p>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

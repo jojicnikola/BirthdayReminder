@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+
+        <!-- inherited employee form view -->
+        <record id="inherited_view_employee_form" model="ir.ui.view">
+            <field name="name">view.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <field name="birthday" position="after">
+                    <field name="bd_reminder"/>
+                    <field name="next_birthday"/>
+                    <field name="birthday_remind_date"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- inherited department form view -->
+        <record id="inherited_view_department_form" model="ir.ui.view">
+            <field name="name">view.department.form.inherit</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form" />
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="number_of_days_before_bd_reminder"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- explicit list view definition -->
+        <record model="ir.ui.view" id="bd_reminder_list_tree">
+            <field name="name">bd.reminder.list.tree</field>
+            <field name="model">bd.reminder.list</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- server action to the one above -->
+        <record model="ir.actions.act_window" id="birthday_reminder_list_action">
+            <field name="name">Birthday reminder list</field>
+            <field name="model_id" ref="model_bd_reminder_list"/>
+            <field name="res_model">bd.reminder.list</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to create a Birthday reminder list.
+                </p>
+            </field>
+        </record>
+
+    <!-- menu categories -->
+    <menuitem name="Birthday Reminder List" id="menu_birthday_reminder_list_action" action="birthday_reminder_list_action" parent="hr.menu_hr_root" sequence="90"/>
+
+  </data>
+</odoo>
